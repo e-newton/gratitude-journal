@@ -1,8 +1,23 @@
 @use 'GlobalVariables' as GV;
 
 button {
+    display: inline-block;
+    padding: GV.$button-padding-x GV.$button-padding-y GV.$button-padding-x;
+    text-align: center;
     background-color: GV.$primary;
     color: GV.$text-on-dark-colour;
     border-style: none;
     border-radius: GV.$border-radius;
+    font-size: 1rem;
+    transition: background-color GV.$hover-transition-time, color GV.$hover-transition-time, border-color GV.$hover-transition-time;
+    border-width: GV.$button-border-width;
+    border-style: solid;
+    border-color: #00000000;
+
+
+    &:hover {
+        background-color: GV.$background;
+        color: GV.$primary;
+        border-color: GV.$primary;
+    }
 }

@@ -1,3 +1,4 @@
+@use '../GlobalVariables.scss' as GV;
 $width: 200px;
 
 .sidebar {
@@ -13,6 +14,6 @@ $width: 200px;
 
     .toggle {
         position: absolute;
-        right: -50px;
+        right: calc(-55px - GV.$button-padding-x - GV.$button-border-width);
     }
 }
