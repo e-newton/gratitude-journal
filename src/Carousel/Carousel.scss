@@ -1,0 +1,8 @@
+@use '../GlobalVariables.scss' as GV;
+.carousel {
+    width: 600px;
+    aspect-ratio: 16 / 9;
+    padding: 25px;
+    background-color: rgba(GV.$primary, 0.4);
+    border-radius: GV.$border-radius;
+}
