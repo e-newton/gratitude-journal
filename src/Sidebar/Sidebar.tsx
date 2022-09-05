@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import './Sidebar.scss';
 
@@ -16,7 +18,9 @@ export function SidebarToggle(props: SidebarToggleProps) {
     }
 
     return (
-        <button className="toggle" onClick={onClick}>{props.opened ? 'Close' : 'Open'}</button>
+        <button className="toggle" onClick={onClick}>
+            <FontAwesomeIcon icon={faChevronRight}/>
+        </button>
     )
 }
 

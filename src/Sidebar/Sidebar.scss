@@ -7,13 +7,22 @@ $width: 200px;
     height: 100vh;
     left: -$width;
     transition: left 1s;
+    border-right: solid 2px GV.$primary;
+    background-color: GV.$primary;
+    color: GV.$text-on-dark-colour;
 
     &.opened {
         left: 0;
+
+        .toggle {
+            transform: rotate(180deg);
+        }
     }
 
     .toggle {
         position: absolute;
-        right: calc(-55px - GV.$button-padding-x - GV.$button-border-width);
+        right: calc(-60px - GV.$button-padding-x - GV.$button-border-width);
+        top: 20px;
+        transition: transform 0.5s;
     }
 }
