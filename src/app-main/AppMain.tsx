@@ -1,9 +1,5 @@
-import { useState } from "react";
-import { Sidebar, SidebarToggle } from "../Sidebar/Sidebar";
+import { Sidebar } from "../Sidebar/Sidebar";
 
-type AppState = {
-    sidebarOpen: boolean;
-}
 
 function AppMain() {
     console.log('App main rerender');

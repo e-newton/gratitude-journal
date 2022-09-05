@@ -1,0 +1,8 @@
+@use 'GlobalVariables' as GV;
+
+button {
+    background-color: GV.$primary;
+    color: GV.$text-on-dark-colour;
+    border-style: none;
+    border-radius: GV.$border-radius;
+}
