@@ -1,28 +1,37 @@
 @use '../GlobalVariables.scss' as GV;
 $width: 200px;
+$toggle-width: 24px;
+$toggle-height: 50px;
 
 .sidebar {
     position: absolute;
     width: $width;
     height: 100vh;
     left: -$width;
-    transition: left 1s;
+    transition: left 1s, box-shadow 1s;
     border-right: solid 2px GV.$primary;
     background-color: GV.$primary;
     color: GV.$text-on-dark-colour;
 
     &.opened {
         left: 0;
+        box-shadow: 2px 0px 2px rgba($color: black, $alpha: 0.5);
 
-        .toggle {
+        .toggle>* {
             transform: rotate(180deg);
         }
     }
 
     .toggle {
         position: absolute;
-        right: calc(-60px - GV.$button-padding-x - GV.$button-border-width);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: $toggle-width;
+        right: -$toggle-width;
+        height: $toggle-height;
         top: 20px;
-        transition: transform 0.5s;
+        * {
+            transition: transform 0.5s;
+        }
     }
 }
