@@ -15,7 +15,7 @@ $toggle-height: 50px;
 
     &.opened {
         left: 0;
-        box-shadow: 2px 0px 2px rgba($color: black, $alpha: 0.5);
+        box-shadow: GV.$box-shadow-level-1;
 
         .toggle>* {
             transform: rotate(180deg);
