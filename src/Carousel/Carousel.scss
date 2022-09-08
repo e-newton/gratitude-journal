@@ -1,8 +1,79 @@
 @use '../GlobalVariables.scss' as GV;
+
+$button-width: 30px;
+$move-time: 0.7s;
 .carousel {
     width: 600px;
     aspect-ratio: 16 / 9;
-    padding: 25px;
-    background-color: rgba(GV.$primary, 0.4);
+    background-color: rgba(GV.$primary, 1);
     border-radius: GV.$border-radius;
+    overflow: hidden;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: $button-width calc(600px - $button-width - $button-width) $button-width;
+
+    button {
+        height: calc(25% - 25px - 25px);
+        z-index: 1;
+        background-color: transparent;
+        border-color: transparent;
+        color: lighten($color: GV.$primary, $amount: 50);
+        &:disabled {
+            color: grey;
+
+            &:hover {
+                color: grey;
+            }
+        }
+        &:hover {
+            color: GV.$text-on-dark-colour;
+        }
+    }
+}
+
+.carousel-item-container {
+    display: grid;
+    grid-auto-flow: column;
+    width: 100%;
+    height: calc(100% - 50px);
+}
+
+.carousel-item {
+    width: calc(600px - $button-width - $button-width);
+    margin-right: calc(25px + $button-width);
+    border-radius: GV.$border-radius;
+    background-color: GV.$background;
+    position: relative;
+    transition: left $move-time ease-in-out, transform $move-time ease-in-out, box-shadow $move-time ease-in-out;
+    transform: scale(90%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .inner-display {
+        margin: 15px;
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        .date {
+            margin: 0 0 15px;
+        }
+
+        .entry {
+            margin: 0 15px 0;
+        }
+
+    }
+
+    &.selected {
+        transform: scale(100%);
+        box-shadow: 0px 10px 15px black;
+    }
+}
+
+.empty-entries {
+    grid-column: 1 / 4;
+    text-align: center;
 }

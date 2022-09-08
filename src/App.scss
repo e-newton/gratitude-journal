@@ -20,4 +20,8 @@ button {
         color: GV.$primary;
         border-color: GV.$primary;
     }
+
+    &:disabled {
+        background-color: gray;
+    }
 }
