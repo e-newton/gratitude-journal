@@ -14,7 +14,7 @@ button {
     border-style: solid;
     border-color: transparent;
 
-    &>svg {
+    &:not(.toggle)>svg {
         margin-left: 5px;
     }
 

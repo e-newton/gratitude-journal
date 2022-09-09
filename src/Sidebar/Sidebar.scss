@@ -29,6 +29,7 @@ $toggle-height: 50px;
         width: $toggle-width;
         right: -$toggle-width;
         height: $toggle-height;
+        box-shadow: GV.$box-shadow-level-1;
         top: 20px;
         * {
             transition: transform 0.5s;
