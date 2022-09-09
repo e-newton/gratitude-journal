@@ -14,6 +14,9 @@ button {
     border-style: solid;
     border-color: transparent;
 
+    &>svg {
+        margin-left: 5px;
+    }
 
     &:hover {
         background-color: GV.$background;
@@ -23,5 +26,16 @@ button {
 
     &:disabled {
         background-color: gray;
+    }
+
+    &.secondary {
+        background-color: GV.$background;
+        color: GV.$text-colour;
+        border-width: 1.5px;
+        border-color: GV.$primary;
+        &:hover {
+            background-color: GV.$primary;
+            color: GV.$text-on-dark-colour;
+        }
     }
 }
