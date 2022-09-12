@@ -12,7 +12,11 @@ function AppMain() {
         {
             date: Date.now(),
             entry: 'test entry lolololol'
-        }
+        },
+        {
+            date: Date.now(),
+            entry: 'test entry number 2'
+        },
     ]
     return (
         <div>
