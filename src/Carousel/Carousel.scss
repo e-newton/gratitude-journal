@@ -55,7 +55,7 @@ $center-column: min(calc(600px - $button-width - $button-width), calc(100vw - $b
     background-color: GV.$background;
     position: relative;
     transition: left $move-time ease-in-out, transform $move-time ease-in-out, box-shadow $move-time ease-in-out;
-    transform: scale(90%);
+    transform: scale(75%);
     display: flex;
     justify-content: center;
     align-items: center;

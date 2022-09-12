@@ -62,8 +62,8 @@ export function Carousel(props: CarouselProps) {
     }
 
     const cantMoveRight = () => {
-        if (!carouselItemContainer.current) return true;
-        return state.index === carouselItemContainer.current.children.length - 1;
+        const length = carouselItemContainer.current?.children.length || props.entries.length;
+        return state.index === length - 1;
     }
 
     const moveLeft = () => {
