@@ -25,7 +25,7 @@ function AppMain() {
                 <Carousel entries={entries}/>
                 <div className="action-container">
                     <button>
-                        <span>Add Entires</span>
+                        <span>Add Entries</span>
                         <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                     </button>
                     <button className="secondary">

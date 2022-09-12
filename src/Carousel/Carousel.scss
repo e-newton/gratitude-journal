@@ -19,6 +19,7 @@ $center-column: min(calc(600px - $button-width - $button-width), calc(100vw - $b
     button {
         height: calc(25% - 25px - 25px);
         z-index: 1;
+        padding: 0;
         background-color: transparent;
         border-color: transparent;
         color: lighten($color: GV.$primary, $amount: 50);
