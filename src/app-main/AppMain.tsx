@@ -2,6 +2,7 @@ import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Carousel, CarouselEntry } from "../Carousel/Carousel";
 import { Sidebar } from "../Sidebar/Sidebar";
+import { WelcomeHeader } from "../welcome-header/WelcomeHeader";
 import './AppMain.scss';
 
 
@@ -22,7 +23,7 @@ function AppMain() {
         <div>
             <Sidebar/>
             <div className="main-content">
-                <h1>Good morning $USER! I hope your day is going well.</h1>
+                <WelcomeHeader/>
                 <Carousel entries={entries}/>
                 <div className="action-container">
                     <button>
