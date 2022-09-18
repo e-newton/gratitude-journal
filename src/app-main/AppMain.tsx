@@ -18,10 +18,11 @@ function AppMain() {
         <div>
             <Sidebar/>
             <div className="main-content">
+                <h1>Good morning $USER! I hope your day is going well.</h1>
                 <Carousel entries={entries}/>
                 <div className="action-container">
                     <button>
-                        <span>Add Entires</span>
+                        <span>Add Entries</span>
                         <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                     </button>
                     <button className="secondary">

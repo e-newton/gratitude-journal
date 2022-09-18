@@ -31,6 +31,9 @@ $toggle-height: 50px;
         height: $toggle-height;
         box-shadow: GV.$box-shadow-level-1;
         top: 20px;
+        &>svg {
+            margin-left: 0;
+        }
         * {
             transition: transform 0.5s;
         }

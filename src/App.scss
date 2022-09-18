@@ -1,5 +1,9 @@
 @use 'GlobalVariables' as GV;
 
+h1 {
+    font-weight: 300;
+}
+
 button {
     display: inline-block;
     padding: GV.$button-padding-x GV.$button-padding-y GV.$button-padding-x;
@@ -14,7 +18,7 @@ button {
     border-style: solid;
     border-color: transparent;
 
-    &:not(.toggle)>svg {
+    &>svg {
         margin-left: 5px;
     }
 
