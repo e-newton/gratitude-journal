@@ -6,12 +6,14 @@ $toggle-height: 50px;
 .sidebar {
     position: absolute;
     width: $width;
+    max-width: calc(100vw - $toggle-width);
     height: 100vh;
     left: -$width;
     transition: left 1s, box-shadow 1s;
     border-right: solid 2px GV.$primary;
     background-color: GV.$primary;
     color: GV.$text-on-dark-colour;
+    z-index: 2;
 
     &.opened {
         left: 0;
@@ -31,6 +33,7 @@ $toggle-height: 50px;
         height: $toggle-height;
         box-shadow: GV.$box-shadow-level-1;
         top: 20px;
+        padding: 0;
         &>svg {
             margin-left: 0;
         }

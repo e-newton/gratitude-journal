@@ -2,8 +2,11 @@
 
 $button-width: 30px;
 $move-time: 0.7s;
+$center-column: min(calc(600px - $button-width - $button-width), calc(100vw - $button-width - $button-width));
 .carousel {
-    width: 600px;
+    margin: 5px;
+    width: calc(600px - 5px);
+    max-width: calc(100vw - 10px);
     aspect-ratio: 16 / 9;
     background-color: rgba(GV.$primary, 1);
     border-radius: GV.$border-radius;
@@ -11,11 +14,12 @@ $move-time: 0.7s;
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: $button-width calc(600px - $button-width - $button-width) $button-width;
+    grid-template-columns: $button-width $center-column $button-width;
 
     button {
         height: calc(25% - 25px - 25px);
         z-index: 1;
+        padding: 0;
         background-color: transparent;
         border-color: transparent;
         color: lighten($color: GV.$primary, $amount: 50);
@@ -29,24 +33,30 @@ $move-time: 0.7s;
         &:hover {
             color: GV.$text-on-dark-colour;
         }
+
+        svg {
+            margin-left: 0;
+        }
     }
 }
 
 .carousel-item-container {
     display: grid;
     grid-auto-flow: column;
+    grid-auto-columns: 100%;
     width: 100%;
     height: calc(100% - 50px);
 }
 
 .carousel-item {
-    width: calc(600px - $button-width - $button-width);
+    width: 100%;
+    max-width: calc(600px - $button-width - $button-width);
     margin-right: calc(25px + $button-width);
     border-radius: GV.$border-radius;
     background-color: GV.$background;
     position: relative;
     transition: left $move-time ease-in-out, transform $move-time ease-in-out, box-shadow $move-time ease-in-out;
-    transform: scale(90%);
+    transform: scale(75%);
     display: flex;
     justify-content: center;
     align-items: center;
