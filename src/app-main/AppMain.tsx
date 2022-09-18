@@ -18,6 +18,10 @@ function AppMain() {
             date: Date.now(),
             entry: 'test entry number 2'
         },
+        {
+            date: Date.now(),
+            entry: 'test entry number 3'
+        },
     ]
     return (
         <div>

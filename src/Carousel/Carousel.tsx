@@ -57,27 +57,38 @@ export function Carousel(props: CarouselProps) {
     const [state, setState] = useState<CarouselState>({index: 0});
     const carouselItemContainer = useRef<HTMLDivElement>(null);
 
-    const cantMoveLeft = () => {
-        return state.index === 0;
-    }
+    const mod = (n: number, m: number) => {
+        return ((n % m) + m) % m;
+      }
 
-    const cantMoveRight = () => {
-        const length = carouselItemContainer.current?.children.length || props.entries.length;
-        return state.index === length - 1;
+    const cantMove = () => {
+        return props.entries.length <= 1;
     }
 
     const moveLeft = () => {
-        if (cantMoveLeft()) {
+        if (cantMove()) {
             return;
         }
-        setState({...state, index: state.index - 1});
+        setState({...state, index: mod(state.index - 1, props.entries.length)});
     }
 
     const moveRight = () => {
-        if (cantMoveRight()) {
+        if (cantMove()) {
             return;
         }
-        setState({...state, index: state.index + 1});
+        setState({...state, index: mod(state.index + 1, props.entries.length)});
+    }
+
+    const getRightEntry = () => {
+        return props.entries[mod(state.index + 1, props.entries.length)]
+    }
+
+    const getLeftEntry = () => {
+        return props.entries[mod(state.index - 1, props.entries.length)]
+    }
+
+    const getCentreEntry = () => {
+        return props.entries[state.index];
     }
 
     if (!props.entries.length) {
@@ -91,18 +102,15 @@ export function Carousel(props: CarouselProps) {
     }
     return (
         <div className='carousel'>
-            <button onClick={moveLeft} disabled={cantMoveLeft()}>
+            <button onClick={moveLeft} disabled={cantMove()}>
                 <FontAwesomeIcon icon={faChevronLeft}/>
             </button>
             <div className='carousel-item-container' ref={carouselItemContainer}>
-                {props.entries.map((entry, i) => <CarouselItem
-                key={i}
-                entry={entry}
-                index={i}
-                selectedIndex={state.index}
-                />)}
+                <CarouselItem entry={getLeftEntry()} index={0} selectedIndex={1}/>
+                <CarouselItem entry={getCentreEntry()} index={1} selectedIndex={1}/>
+                <CarouselItem entry={getRightEntry()} index={2} selectedIndex={1}/>
             </div>
-            <button onClick={moveRight} disabled={cantMoveRight()}>
+            <button onClick={moveRight} disabled={cantMove()}>
                 <FontAwesomeIcon icon={faChevronRight}/>
             </button>
         </div>
