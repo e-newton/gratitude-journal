@@ -1,13 +1,27 @@
-import { faList, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Carousel, CarouselEntry } from "../Carousel/Carousel";
+import { TransitionEvent, useState } from "react";
+import AddEntriesView from "../add-entries-view/AddEntriesView";
+import { CarouselEntry } from "../Carousel/Carousel";
+import MainView from "../main-view/MainView";
 import { Sidebar } from "../Sidebar/Sidebar";
-import { WelcomeHeader } from "../welcome-header/WelcomeHeader";
 import './AppMain.scss';
+
+export enum AppViewState {
+    MainView,
+    AddingEntries,
+    ViewingAllEntries
+}
+
+type AppState = {
+    view: AppViewState,
+    nextView?: AppViewState,
+    transitioning: boolean;
+}
 
 
 function AppMain() {
     console.log('App main rerender');
+
+    const [state, setState] = useState<AppState>({view: AppViewState.MainView, transitioning: false});
 
     const entries: CarouselEntry[] = [
         {
@@ -19,22 +33,34 @@ function AppMain() {
             entry: 'test entry number 2'
         },
     ]
+
+    const getClassName = () => {
+        const classes = ['main-content'];
+        if (state.transitioning) {
+            classes.push('hidden');
+        }
+        return classes.join(' ')
+    }
+
+    const changeView = (event: TransitionEvent<HTMLDivElement>) => {
+        if (event.nativeEvent.propertyName === 'top' && state.transitioning) {
+            if (!state.nextView) {
+                throw Error('No next view was provided');
+            }
+            setState({...state, view: state.nextView, nextView: undefined, transitioning: false});
+        }
+    }
+
+    const startTransition = (nextView: AppViewState) => {
+        setState({...state, nextView, transitioning: true})
+    }
+
     return (
         <div>
             <Sidebar/>
-            <div className="main-content">
-                <WelcomeHeader/>
-                <Carousel entries={entries}/>
-                <div className="action-container">
-                    <button>
-                        <span>Add Entries</span>
-                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                    </button>
-                    <button className="secondary">
-                        <span>View All Entries</span>
-                        <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
-                    </button>
-                </div>
+            <div className={getClassName()} onTransitionEnd={changeView}>
+                {state.view === AppViewState.MainView && <MainView entries={entries} transition={startTransition}/>}
+                {state.view === AppViewState.AddingEntries && <AddEntriesView/>}
             </div>
         </div>
     )

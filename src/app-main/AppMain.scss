@@ -4,11 +4,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    transition: top 0.8s ease-in-out;
+    top: 0px;
 
-    .action-container {
-        width: 600px;
-        max-width: 100vw;
-        display: flex;
-        justify-content: space-evenly;
+    &.hidden {
+        top: -100vh;
     }
 }
