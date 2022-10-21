@@ -1,0 +1,42 @@
+.back-button {
+    position: absolute;
+    top: 1.4em;
+    left: -50px;
+    svg {
+        margin: 0;
+    }
+}
+.entries {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    button {
+        max-width: 150px;
+    }
+    .entry-container {
+        display: flex;
+        align-items: center;
+        width: calc(100%);
+        button {
+            position: absolute;
+            right: -16px;
+        }
+        button>svg {
+            margin: 0;
+        }
+    }
+}
+.add-entries-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%;
+    position: relative;
+}
+
+.submit-button {
+
+}

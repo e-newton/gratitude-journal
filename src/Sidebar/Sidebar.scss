@@ -3,8 +3,15 @@ $width: 200px;
 $toggle-width: 24px;
 $toggle-height: 50px;
 
+.sticky-anchor {
+    position: sticky;
+    height: 0;
+    top: 0;
+    z-index: 1;
+}
+
 .sidebar {
-    position: absolute;
+    position: relative;
     width: $width;
     max-width: calc(100vw - $toggle-width);
     height: 100vh;

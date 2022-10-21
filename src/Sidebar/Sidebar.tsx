@@ -39,11 +39,11 @@ export function Sidebar() {
     }
 
     return (
-        <>
+        <div className="sticky-anchor">
             <div className={getClassName()}>
                 {state.opened ? 'opened' : 'closed'}
                 <SidebarToggle onToggle={onSidebarToggle} opened={state.opened}/>
             </div>
-        </>
+        </div>
     )
 }

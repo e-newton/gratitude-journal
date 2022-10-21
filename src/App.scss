@@ -43,3 +43,15 @@ button {
         }
     }
 }
+
+textarea {
+    max-width: 350px;
+    min-width: 90%;
+    min-height: 32px;
+    padding: GV.$input-padding-y GV.$button-padding-x GV.$button-padding-y;
+    border-radius: GV.$border-radius;
+    resize: none;
+    transition: height 0.2s ease-in-out;
+    height: 32px;
+    opacity: 50%;
+}

@@ -44,7 +44,7 @@ function AppMain() {
 
     const changeView = (event: TransitionEvent<HTMLDivElement>) => {
         if (event.nativeEvent.propertyName === 'top' && state.transitioning) {
-            if (!state.nextView) {
+            if (state.nextView === undefined) {
                 throw Error('No next view was provided');
             }
             setState({...state, view: state.nextView, nextView: undefined, transitioning: false});
@@ -52,6 +52,7 @@ function AppMain() {
     }
 
     const startTransition = (nextView: AppViewState) => {
+        console.log(nextView);
         setState({...state, nextView, transitioning: true})
     }
 
@@ -60,7 +61,7 @@ function AppMain() {
             <Sidebar/>
             <div className={getClassName()} onTransitionEnd={changeView}>
                 {state.view === AppViewState.MainView && <MainView entries={entries} transition={startTransition}/>}
-                {state.view === AppViewState.AddingEntries && <AddEntriesView/>}
+                {state.view === AppViewState.AddingEntries && <AddEntriesView transition={startTransition}/>}
             </div>
         </div>
     )
