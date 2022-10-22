@@ -19,7 +19,7 @@ export default function MainView(props: MainViewProps) {
                     <span>Add Entries</span>
                     <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                 </button>
-                <button className="secondary">
+                <button className="secondary" onClick={() => props.transition(AppViewState.ViewingAllEntries)}>
                     <span>View All Entries</span>
                     <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
                 </button>
