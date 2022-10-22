@@ -1,0 +1,2 @@
+import './ViewEntriesView.scss';
+
