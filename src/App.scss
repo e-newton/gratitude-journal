@@ -55,3 +55,19 @@ textarea {
     height: 32px;
     opacity: 50%;
 }
+
+.view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%;
+    position: relative;
+    .back-button {
+        position: absolute;
+        top: 1.4em;
+        left: -50px;
+        svg {
+            margin: 0;
+        }
+}
+}

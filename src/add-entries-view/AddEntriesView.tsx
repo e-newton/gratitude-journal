@@ -1,6 +1,6 @@
 import { faChevronLeft, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { RefObject, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { AppViewState } from '../app-main/AppMain';
 import EntryInput from '../entry-input/EntryInput';
@@ -68,7 +68,7 @@ export default function AddEntriesView(props: AddEntriesProps) {
     }
 
     return (
-        <div className='add-entries-container'>
+        <div className='view-container'>
             <button className='back-button secondary' onClick={() => props.transition(AppViewState.MainView)}>
                 <FontAwesomeIcon icon={faChevronLeft}/>
             </button>
