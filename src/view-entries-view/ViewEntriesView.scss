@@ -18,6 +18,12 @@
             flex-grow: 1;
             text-align: center;
             margin: 0 16px 0;
+            select {
+                -webkit-appearance: none;
+                border: none;
+                background: none;
+                font-size: inherit;
+            }
         }
         svg {
             cursor: pointer;

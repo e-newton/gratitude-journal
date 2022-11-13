@@ -101,6 +101,14 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
 
     };
 
+    const selectMonth = (month: string) => {
+        setState({...state, viewMonth: MONTHS.indexOf(month)});
+    };
+
+    const selectYear = (year: string) => {
+        setState({...state, viewYear: parseInt(year)});
+    };
+
     const selectDay = (day: number) => {
         setState({...state, selectedDay: new Date(state.viewYear, state.viewMonth, day)});
     };
@@ -113,7 +121,15 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
             <div className='calendar'>
                 <div className='month-year'>
                     <FontAwesomeIcon icon={faChevronLeft} onClick={() => previousMonth()}/>
-                    <span>{`${MONTHS[state.viewMonth]} ${state.viewYear}`}</span>
+                    <span>
+                        <select value={MONTHS[state.viewMonth]} onChange={e => selectMonth(e.target.value)}>
+                            { MONTHS.map(month => <option key={month} value={month}>{month}</option>)}
+                        </select>
+                        <select value={state.viewYear} onChange={e => selectYear(e.target.value)}>
+                            { Array.from({length: 100}).map((_, i) => <option key={i} value={i + 1970}>{i + 1970}</option>)}
+                        </select>
+                        {/* {`${MONTHS[state.viewMonth]} ${state.viewYear}`} */}
+                    </span>
                     <FontAwesomeIcon icon={faChevronRight} onClick={() => nextMonth()}/>
                 </div>
                 <div className='grid'>
