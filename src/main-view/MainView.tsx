@@ -1,3 +1,4 @@
+import React from 'react';
 import { faPlus, faList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AppViewState } from '../app-main/AppMain';
@@ -25,5 +26,5 @@ export default function MainView(props: MainViewProps) {
                 </button>
             </div>
         </>
-    )
+    );
 }

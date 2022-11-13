@@ -1,6 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { useState } from "react"
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 import './Sidebar.scss';
 
 export type SidebarToggleProps = {
@@ -15,13 +16,13 @@ export type SidebarState = {
 export function SidebarToggle(props: SidebarToggleProps) {
     const onClick = () => {
         props.onToggle(!props.opened);
-    }
+    };
 
     return (
         <button className="toggle" onClick={onClick}>
             <FontAwesomeIcon icon={faChevronRight}/>
         </button>
-    )
+    );
 }
 
 export function Sidebar() {
@@ -30,13 +31,13 @@ export function Sidebar() {
 
     const onSidebarToggle = (sidebarToggle: boolean) => {
         setState({...state, opened: sidebarToggle});
-    }
+    };
 
     const getClassName = () => {
         const classes = ['sidebar'];
         state.opened && classes.push('opened');
         return classes.join(' ');
-    }
+    };
 
     return (
         <div className="sticky-anchor">
@@ -45,5 +46,5 @@ export function Sidebar() {
                 <SidebarToggle onToggle={onSidebarToggle} opened={state.opened}/>
             </div>
         </div>
-    )
+    );
 }

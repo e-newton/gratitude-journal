@@ -1,3 +1,4 @@
+import React from 'react';
 import { faChevronLeft, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
@@ -28,28 +29,28 @@ export default function AddEntriesView(props: AddEntriesProps) {
             entries: [
                 {
                     id,
-                    entry: ""
+                    entry: ''
                 }
             ],
             currentlySelectedEntryId: id,
             showEntries: false
-        }
-    })
+        };
+    });
 
     useEffect(() => {
         setTimeout(() => {
             setState(s => ({...s, showEntries: true}));
-        }, 1)
-    }, [])
+        }, 1);
+    }, []);
 
-    const onGhostEntryFocus = (_: string) => {
+    const onGhostEntryFocus = () => {
         const id = uuidv4();
-        setState({...state, entries: [...state.entries, { id, entry: ""}], currentlySelectedEntryId: id});
-    }
+        setState({...state, entries: [...state.entries, { id, entry: ''}], currentlySelectedEntryId: id});
+    };
 
     const onEntryFocus = (id: string) => {
         setState({...state, currentlySelectedEntryId: id});
-    }
+    };
 
     const deleteEntry = (id: string) => {
         const index = state.entries.findIndex(entry => entry.id === id);
@@ -59,13 +60,13 @@ export default function AddEntriesView(props: AddEntriesProps) {
             ...state,
             entries: state.entries,
             currentlySelectedEntryId: newFocusId
-        })
-    }
+        });
+    };
 
     const submit = () => {
         console.log(state.entries.filter(entry => !!entry.entry));
         props.transition(AppViewState.MainView);
-    }
+    };
 
     return (
         <div className='view-container'>
@@ -76,20 +77,20 @@ export default function AddEntriesView(props: AddEntriesProps) {
             <div className='entries'>
                 {
                     state.entries.map((entry, i) =>
-                    <div className='entry-container' key={entry.id}>
-                        <EntryInput entry={entry} id={entry.id} onFocus={onEntryFocus} selected={state.showEntries && entry.id === state.currentlySelectedEntryId}/>
-                        {
-                            i > 0 &&
+                        <div className='entry-container' key={entry.id}>
+                            <EntryInput entry={entry} id={entry.id} onFocus={onEntryFocus} selected={state.showEntries && entry.id === state.currentlySelectedEntryId}/>
+                            {
+                                i > 0 &&
                             <button onClick={() => deleteEntry(entry.id)}>
                                 <FontAwesomeIcon icon={faX}/>
                             </button>
-                        }
-                    </div>
+                            }
+                        </div>
                     )
                 }
                 <EntryInput entry={{entry: '', id: 'ghost-id'}} id={'ghost-id'} onFocus={onGhostEntryFocus} selected={false}/>
             </div>
             <button className='submit-button' onClick={submit}>Submit</button>
         </div>
-    )
+    );
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AppViewState } from '../app-main/AppMain';
@@ -21,9 +22,9 @@ const MONTHS: string[] = [
     'October',
     'November',
     'December'
- ];
+];
 
- const DAYS: string[] = [
+const DAYS: string[] = [
     'Sunday',
     'Monday',
     'Tuesday',
@@ -31,9 +32,9 @@ const MONTHS: string[] = [
     'Thursday',
     'Friday',
     'Saturday'
- ]
+];
 
- const DAYS_ACC: string[] = [
+const DAYS_ACC: string[] = [
     'Sun',
     'Mon',
     'Tue',
@@ -41,7 +42,7 @@ const MONTHS: string[] = [
     'Thr',
     'Fri',
     'Sat'
- ]
+];
 
  type CalendarState = {
     selectedDay: Date;
@@ -57,21 +58,21 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
             selectedDay: today,
             viewMonth: today.getMonth(),
             viewYear: today.getFullYear()
-        }
+        };
     });
 
     const daysInMonth = (month: number, year: number) => {
         return new Date(year, month + 1, 0).getDate();
-    }
+    };
 
     const getDayOfWeek = (day: number, month: number, year: number) => {
         return DAYS[new Date(year, month, day).getDay()];
-    }
+    };
 
     const getListOfDays = (month: number, year: number) => {
         const numDays = daysInMonth(month, year);
         return Array.from({length: numDays}).map((_, i) => i + 1);
-    }
+    };
 
     const getListOfDaysWithBuffer = (month: number, year: number) => {
         let days = getListOfDays(month, year);
@@ -81,28 +82,28 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
             days = [...Array.from({length: dayIndex}).map(() => 0), ...days];
         }
         return days;
-    }
+    };
 
     const nextMonth = () => {
         if (state.viewMonth === 11) {
-            setState({...state, viewMonth: 0, viewYear: state.viewYear + 1})
+            setState({...state, viewMonth: 0, viewYear: state.viewYear + 1});
         } else {
-            setState({...state, viewMonth: state.viewMonth + 1})
+            setState({...state, viewMonth: state.viewMonth + 1});
         }
-    }
+    };
 
     const previousMonth = () => {
         if (state.viewMonth === 0) {
-            setState({...state, viewMonth: 11, viewYear: state.viewYear - 1})
+            setState({...state, viewMonth: 11, viewYear: state.viewYear - 1});
         } else {
-            setState({...state, viewMonth: state.viewMonth - 1})
+            setState({...state, viewMonth: state.viewMonth - 1});
         }
 
-    }
+    };
 
     const selectDay = (day: number) => {
         setState({...state, selectedDay: new Date(state.viewYear, state.viewMonth, day)});
-    }
+    };
 
     return (
         <div className='view-container'>
@@ -112,13 +113,13 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
             <div className='calendar'>
                 <div className='month-year'>
                     <FontAwesomeIcon icon={faChevronLeft} onClick={() => previousMonth()}/>
-                        <span>{`${MONTHS[state.viewMonth]} ${state.viewYear}`}</span>
+                    <span>{`${MONTHS[state.viewMonth]} ${state.viewYear}`}</span>
                     <FontAwesomeIcon icon={faChevronRight} onClick={() => nextMonth()}/>
                 </div>
                 <div className='grid'>
                     {
                         DAYS_ACC.map((day, i) => {
-                            return <span key={day + i}>{day}</span>
+                            return <span key={day + i}>{day}</span>;
                         })
                     }
                     {
@@ -130,17 +131,17 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
                             if (day === state.selectedDay.getDate() &&
                                 state.selectedDay.getMonth() === state.viewMonth &&
                                 state.selectedDay.getFullYear() === state.viewYear) {
-                                classNames.push('selected')
+                                classNames.push('selected');
                             }
                             return <div className={classNames.join(' ')} key={i} onClick={() => selectDay(day)}>
-                                        <span>
-                                            {day}
-                                        </span>
-                                    </div>
+                                <span>
+                                    {day}
+                                </span>
+                            </div>;
                         })
                     }
                 </div>
             </div>
         </div>
-    )
+    );
 }
