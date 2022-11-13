@@ -10,29 +10,28 @@ import './AppMain.scss';
 export enum AppViewState {
     MainView,
     AddingEntries,
-    ViewingAllEntries
+    ViewingAllEntries,
 }
 
 type AppState = {
-    view: AppViewState,
-    nextView?: AppViewState,
+    view: AppViewState;
+    nextView?: AppViewState;
     transitioning: boolean;
-}
-
+};
 
 function AppMain() {
     console.log('App main rerender');
 
-    const [state, setState] = useState<AppState>({view: AppViewState.MainView, transitioning: false});
+    const [state, setState] = useState<AppState>({ view: AppViewState.MainView, transitioning: false });
 
     const entries: CarouselEntry[] = [
         {
             date: Date.now(),
-            entry: 'test entry lolololol'
+            entry: 'test entry lolololol',
         },
         {
             date: Date.now(),
-            entry: 'test entry number 2'
+            entry: 'test entry number 2',
         },
     ];
 
@@ -49,22 +48,22 @@ function AppMain() {
             if (state.nextView === undefined) {
                 throw Error('No next view was provided');
             }
-            setState({...state, view: state.nextView, nextView: undefined, transitioning: false});
+            setState({ ...state, view: state.nextView, nextView: undefined, transitioning: false });
         }
     };
 
     const startTransition = (nextView: AppViewState) => {
         console.log(nextView);
-        setState({...state, nextView, transitioning: true});
+        setState({ ...state, nextView, transitioning: true });
     };
 
     return (
         <div>
-            <Sidebar/>
+            <Sidebar />
             <div className={getClassName()} onTransitionEnd={changeView}>
-                {state.view === AppViewState.MainView && <MainView entries={entries} transition={startTransition}/>}
-                {state.view === AppViewState.AddingEntries && <AddEntriesView transition={startTransition}/>}
-                {state.view === AppViewState.ViewingAllEntries && <ViewEntriesView transition={startTransition}/>}
+                {state.view === AppViewState.MainView && <MainView entries={entries} transition={startTransition} />}
+                {state.view === AppViewState.AddingEntries && <AddEntriesView transition={startTransition} />}
+                {state.view === AppViewState.ViewingAllEntries && <ViewEntriesView transition={startTransition} />}
             </div>
         </div>
     );

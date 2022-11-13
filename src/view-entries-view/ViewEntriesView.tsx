@@ -15,7 +15,7 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
             <button className='back-button secondary' onClick={() => props.transition(AppViewState.MainView)}>
                 <FontAwesomeIcon icon={faChevronLeft}/>
             </button>
-            <Calendar/>
+            <Calendar onSelectChange={s => console.log(s)}/>
         </div>
     );
 }

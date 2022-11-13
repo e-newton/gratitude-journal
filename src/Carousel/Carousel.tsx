@@ -7,21 +7,21 @@ import './Carousel.scss';
 export type CarouselEntry = {
     entry: string;
     date: Date | number;
-}
+};
 
 export type CarouselItemProps = {
     entry: CarouselEntry;
     index: number;
     selectedIndex: number;
-}
+};
 
 export type CarouselState = {
     index: number;
-}
+};
 
 export type CarouselProps = {
     entries: CarouselEntry[];
-}
+};
 
 export function CarouselItem(props: CarouselItemProps) {
     const getIndexLeft = () => {
@@ -40,22 +40,17 @@ export function CarouselItem(props: CarouselItemProps) {
         return date.toLocaleDateString();
     };
     return (
-        <div className={getClassName()} style={{left: getIndexLeft()}}>
+        <div className={getClassName()} style={{ left: getIndexLeft() }}>
             <div className='inner-display'>
-                <div className='date'>
-                    {getDate()}
-                </div>
-                <div className='entry'>
-                    {props.entry.entry}
-                </div>
+                <div className='date'>{getDate()}</div>
+                <div className='entry'>{props.entry.entry}</div>
             </div>
         </div>
     );
 }
 
 export function Carousel(props: CarouselProps) {
-
-    const [state, setState] = useState<CarouselState>({index: 0});
+    const [state, setState] = useState<CarouselState>({ index: 0 });
     const carouselItemContainer = useRef<HTMLDivElement>(null);
 
     const cantMoveLeft = () => {
@@ -71,40 +66,35 @@ export function Carousel(props: CarouselProps) {
         if (cantMoveLeft()) {
             return;
         }
-        setState({...state, index: state.index - 1});
+        setState({ ...state, index: state.index - 1 });
     };
 
     const moveRight = () => {
         if (cantMoveRight()) {
             return;
         }
-        setState({...state, index: state.index + 1});
+        setState({ ...state, index: state.index + 1 });
     };
 
     if (!props.entries.length) {
         return (
             <div className='carousel'>
-                <div className='empty-entries'>
-                    Nothing to show yet!
-                </div>
+                <div className='empty-entries'>Nothing to show yet!</div>
             </div>
         );
     }
     return (
         <div className='carousel'>
             <button onClick={moveLeft} disabled={cantMoveLeft()}>
-                <FontAwesomeIcon icon={faChevronLeft}/>
+                <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <div className='carousel-item-container' ref={carouselItemContainer}>
-                {props.entries.map((entry, i) => <CarouselItem
-                    key={i}
-                    entry={entry}
-                    index={i}
-                    selectedIndex={state.index}
-                />)}
+                {props.entries.map((entry, i) => (
+                    <CarouselItem key={i} entry={entry} index={i} selectedIndex={state.index} />
+                ))}
             </div>
             <button onClick={moveRight} disabled={cantMoveRight()}>
-                <FontAwesomeIcon icon={faChevronRight}/>
+                <FontAwesomeIcon icon={faChevronRight} />
             </button>
         </div>
     );

@@ -5,7 +5,7 @@ import AppMain from './app-main/AppMain';
 function App() {
     return (
         <>
-            <AppMain/>
+            <AppMain />
         </>
     );
 }

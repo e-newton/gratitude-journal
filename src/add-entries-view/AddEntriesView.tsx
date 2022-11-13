@@ -9,18 +9,18 @@ import './AddEntriesView.scss';
 
 type AddEntriesProps = {
     transition: (nextView: AppViewState) => void;
-}
+};
 
 export type InterimEntry = {
-    entry: string,
-    id: string,
-}
+    entry: string;
+    id: string;
+};
 
 type AddEntriesViewState = {
     showEntries: boolean;
     entries: InterimEntry[];
     currentlySelectedEntryId?: string;
-}
+};
 
 export default function AddEntriesView(props: AddEntriesProps) {
     const [state, setState] = useState<AddEntriesViewState>(() => {
@@ -29,27 +29,27 @@ export default function AddEntriesView(props: AddEntriesProps) {
             entries: [
                 {
                     id,
-                    entry: ''
-                }
+                    entry: '',
+                },
             ],
             currentlySelectedEntryId: id,
-            showEntries: false
+            showEntries: false,
         };
     });
 
     useEffect(() => {
         setTimeout(() => {
-            setState(s => ({...s, showEntries: true}));
+            setState(s => ({ ...s, showEntries: true }));
         }, 1);
     }, []);
 
     const onGhostEntryFocus = () => {
         const id = uuidv4();
-        setState({...state, entries: [...state.entries, { id, entry: ''}], currentlySelectedEntryId: id});
+        setState({ ...state, entries: [...state.entries, { id, entry: '' }], currentlySelectedEntryId: id });
     };
 
     const onEntryFocus = (id: string) => {
-        setState({...state, currentlySelectedEntryId: id});
+        setState({ ...state, currentlySelectedEntryId: id });
     };
 
     const deleteEntry = (id: string) => {
@@ -59,7 +59,7 @@ export default function AddEntriesView(props: AddEntriesProps) {
         setState({
             ...state,
             entries: state.entries,
-            currentlySelectedEntryId: newFocusId
+            currentlySelectedEntryId: newFocusId,
         });
     };
 
@@ -71,26 +71,35 @@ export default function AddEntriesView(props: AddEntriesProps) {
     return (
         <div className='view-container'>
             <button className='back-button secondary' onClick={() => props.transition(AppViewState.MainView)}>
-                <FontAwesomeIcon icon={faChevronLeft}/>
+                <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <h1>What are you grateful for today?</h1>
             <div className='entries'>
-                {
-                    state.entries.map((entry, i) =>
-                        <div className='entry-container' key={entry.id}>
-                            <EntryInput entry={entry} id={entry.id} onFocus={onEntryFocus} selected={state.showEntries && entry.id === state.currentlySelectedEntryId}/>
-                            {
-                                i > 0 &&
+                {state.entries.map((entry, i) => (
+                    <div className='entry-container' key={entry.id}>
+                        <EntryInput
+                            entry={entry}
+                            id={entry.id}
+                            onFocus={onEntryFocus}
+                            selected={state.showEntries && entry.id === state.currentlySelectedEntryId}
+                        />
+                        {i > 0 && (
                             <button onClick={() => deleteEntry(entry.id)}>
-                                <FontAwesomeIcon icon={faX}/>
+                                <FontAwesomeIcon icon={faX} />
                             </button>
-                            }
-                        </div>
-                    )
-                }
-                <EntryInput entry={{entry: '', id: 'ghost-id'}} id={'ghost-id'} onFocus={onGhostEntryFocus} selected={false}/>
+                        )}
+                    </div>
+                ))}
+                <EntryInput
+                    entry={{ entry: '', id: 'ghost-id' }}
+                    id={'ghost-id'}
+                    onFocus={onGhostEntryFocus}
+                    selected={false}
+                />
             </div>
-            <button className='submit-button' onClick={submit}>Submit</button>
+            <button className='submit-button' onClick={submit}>
+                Submit
+            </button>
         </div>
     );
 }
