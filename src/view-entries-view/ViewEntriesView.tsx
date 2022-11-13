@@ -122,13 +122,18 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
                 <div className='month-year'>
                     <FontAwesomeIcon icon={faChevronLeft} onClick={() => previousMonth()}/>
                     <span>
-                        <select value={MONTHS[state.viewMonth]} onChange={e => selectMonth(e.target.value)}>
-                            { MONTHS.map(month => <option key={month} value={month}>{month}</option>)}
-                        </select>
-                        <select value={state.viewYear} onChange={e => selectYear(e.target.value)}>
-                            { Array.from({length: 100}).map((_, i) => <option key={i} value={i + 1970}>{i + 1970}</option>)}
-                        </select>
-                        {/* {`${MONTHS[state.viewMonth]} ${state.viewYear}`} */}
+                        <span className='dropdown'>
+                            <select value={MONTHS[state.viewMonth]} onChange={e => selectMonth(e.target.value)}>
+                                { MONTHS.map(month => <option key={month} value={month}>{month}</option>)}
+                            </select>
+                            {MONTHS[state.viewMonth]}
+                        </span>
+                        <span className='dropdown'>
+                            <select value={state.viewYear} onChange={e => selectYear(e.target.value)}>
+                                { Array.from({length: 100}).map((_, i) => <option key={i} value={i + 1970}>{i + 1970}</option>)}
+                            </select>
+                            {state.viewYear}
+                        </span>
                     </span>
                     <FontAwesomeIcon icon={faChevronRight} onClick={() => nextMonth()}/>
                 </div>

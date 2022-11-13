@@ -14,15 +14,29 @@
         width: 200px;
         justify-content: space-around;
         margin-top: 8px;
-        span {
+        &>span {
             flex-grow: 1;
             text-align: center;
             margin: 0 16px 0;
-            select {
-                -webkit-appearance: none;
-                border: none;
-                background: none;
-                font-size: inherit;
+            span.dropdown {
+                position: relative;
+                pointer-events: none;
+                &:nth-child(1) {
+                    margin-right: 8px;
+                }
+                select {
+                    pointer-events: auto;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    position: absolute;
+                    -webkit-appearance: none;
+                    border: none;
+                    background: none;
+                    font-size: inherit;
+                    color: transparent;
+                }
             }
         }
         svg {
