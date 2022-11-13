@@ -33,6 +33,8 @@ type CalendarView = {
 export type CalendarProps = {
     onViewChange?: (view: CalendarView) => void;
     onSelectChange?: (selection: CalendarSelection) => void;
+    initialSelectedDay?: CalendarSelection;
+    initialView?: CalendarView;
 };
 
 type CalendarState = {
@@ -43,21 +45,15 @@ type CalendarState = {
 
 export default function Calendar(props: CalendarProps) {
     const [state, setState] = useState<CalendarState>(() => {
-        const today = new Date();
+        const selectedDay = props.initialSelectedDay
+            ? new Date(props.initialSelectedDay.year, props.initialSelectedDay.month, props.initialSelectedDay.day)
+            : new Date();
         return {
-            selectedDay: today,
-            viewMonth: today.getMonth(),
-            viewYear: today.getFullYear(),
+            selectedDay: selectedDay,
+            viewMonth: props.initialView?.month ?? selectedDay.getMonth(),
+            viewYear: props.initialView?.year ?? selectedDay.getFullYear(),
         };
     });
-
-    const onViewChange = () => {
-        props.onViewChange?.({ month: state.viewMonth, year: state.viewYear });
-    };
-
-    const onSelectChange = () => {
-        props.onSelectChange?.({ day: state.selectedDay.getDate(), month: state.viewMonth, year: state.viewYear });
-    };
 
     const daysInMonth = (month: number, year: number) => {
         return new Date(year, month + 1, 0).getDate();
@@ -82,37 +78,49 @@ export default function Calendar(props: CalendarProps) {
         return days;
     };
 
+    const setViewState = (newState: CalendarState) => {
+        setState(newState);
+        props.onViewChange?.({ month: newState.viewMonth, year: newState.viewYear });
+    };
+
     const nextMonth = () => {
-        setState(
-            state.viewMonth === 1
-                ? { ...state, viewMonth: 0, viewYear: state.viewYear + 1 }
-                : { ...state, viewMonth: state.viewMonth + 1 }
-        );
-        onViewChange();
+        let newState: CalendarState;
+        if (state.viewMonth === 1) {
+            newState = { ...state, viewMonth: 0, viewYear: state.viewYear + 1 };
+        } else {
+            newState = { ...state, viewMonth: state.viewMonth + 1 };
+        }
+        setViewState(newState);
     };
 
     const previousMonth = () => {
+        let newState: CalendarState;
         if (state.viewMonth === 0) {
-            setState({ ...state, viewMonth: 11, viewYear: state.viewYear - 1 });
+            newState = { ...state, viewMonth: 11, viewYear: state.viewYear - 1 };
         } else {
-            setState({ ...state, viewMonth: state.viewMonth - 1 });
+            newState = { ...state, viewMonth: state.viewMonth - 1 };
         }
-        onViewChange();
+        setViewState(newState);
     };
 
     const selectMonth = (month: string) => {
-        setState({ ...state, viewMonth: MONTHS.indexOf(month) });
-        onViewChange();
+        const newState = { ...state, viewMonth: MONTHS.indexOf(month) };
+        setViewState(newState);
     };
 
     const selectYear = (year: string) => {
-        setState({ ...state, viewYear: parseInt(year) });
-        onViewChange();
+        const newState = { ...state, viewYear: parseInt(year) };
+        setViewState(newState);
     };
 
     const selectDay = (day: number) => {
-        setState({ ...state, selectedDay: new Date(state.viewYear, state.viewMonth, day) });
-        onSelectChange();
+        const newState = { ...state, selectedDay: new Date(state.viewYear, state.viewMonth, day) };
+        setState(newState);
+        props.onSelectChange?.({
+            day: newState.selectedDay.getDate(),
+            month: newState.viewMonth,
+            year: newState.viewYear,
+        });
     };
 
     return (
