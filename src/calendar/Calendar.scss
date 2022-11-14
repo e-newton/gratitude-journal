@@ -1,0 +1,96 @@
+@use '../GlobalVariables' as GV;
+.calendar {
+    margin-top: 100px;
+    width: 300px;
+    border-radius: GV.$border-radius;
+    border: 2px solid GV.$primary;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .month-year {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 8px;
+        &>span {
+            flex-grow: 1;
+            text-align: center;
+            margin: 0 16px 0;
+            span.dropdown {
+                position: relative;
+                pointer-events: none;
+                &:nth-child(1) {
+                    margin-right: 8px;
+                }
+                select {
+                    pointer-events: auto;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    position: absolute;
+                    -webkit-appearance: none;
+                    border: none;
+                    background: none;
+                    font-size: inherit;
+                    color: transparent;
+                }
+            }
+        }
+        svg {
+            cursor: pointer;
+        }
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+    }
+
+    .grid {
+        padding: 16px;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+        grid-auto-flow: row;
+
+        span {
+            font-size: smaller;
+            text-align: center;
+        }
+
+        .day {
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            border-radius: 50%;
+            background-color: GV.$background;
+            color: GV.$text-colour;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid GV.$primary;
+            cursor: pointer;
+
+            &:not(.selected):hover {
+                background-color: rgba($color: GV.$primary, $alpha: 0.4);
+            }
+
+            span {
+                margin: 0;
+            }
+
+            &.selected {
+                background-color: GV.$primary;
+                color: GV.$text-on-dark-colour
+            }
+
+
+            &.hidden {
+                opacity: 0;
+            }
+        }
+    }
+}

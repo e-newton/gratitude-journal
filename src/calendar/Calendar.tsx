@@ -1,6 +1,7 @@
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
+import './Calendar.scss';
 
 const MONTHS: string[] = [
     'January',
@@ -21,11 +22,11 @@ const DAYS: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 
 
 const DAYS_ACC: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
 
-type CalendarSelection = CalendarView & {
+export type CalendarSelection = CalendarView & {
     day: number;
 };
 
-type CalendarView = {
+export type CalendarView = {
     month: number;
     year: number;
 };
