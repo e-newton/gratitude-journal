@@ -2,6 +2,7 @@ import React from 'react';
 import { TransitionEvent, useState } from 'react';
 import AddEntriesView from '../add-entries-view/AddEntriesView';
 import { CarouselEntry } from '../Carousel/Carousel';
+import Footer from '../footer/Footer';
 import MainView from '../main-view/MainView';
 import { Sidebar } from '../Sidebar/Sidebar';
 import ViewEntriesView from '../view-entries-view/ViewEntriesView';
@@ -58,13 +59,14 @@ function AppMain() {
     };
 
     return (
-        <div>
+        <div className='app-main'>
             <Sidebar />
             <div className={getClassName()} onTransitionEnd={changeView}>
                 {state.view === AppViewState.MainView && <MainView entries={entries} transition={startTransition} />}
                 {state.view === AppViewState.AddingEntries && <AddEntriesView transition={startTransition} />}
                 {state.view === AppViewState.ViewingAllEntries && <ViewEntriesView transition={startTransition} />}
             </div>
+            <Footer/>
         </div>
     );
 }
