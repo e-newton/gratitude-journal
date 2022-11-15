@@ -1,0 +1,50 @@
+
+@use '../GlobalVariables' as GV;
+.options-select {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 4px;
+    right: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color GV.$hover-transition-time ease-in-out;
+    color: GV.$primary;
+    border-radius: GV.$border-radius;
+
+    .dropdown {
+        display: none;
+    }
+
+    &:hover {
+        background-color: GV.$primary-hover;
+    }
+
+    &.opened {
+        background-color: GV.$primary-hover;
+        border-radius: GV.$border-radius 0 0 GV.$border-radius;
+        .dropdown {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 100px;
+            padding: 4px;
+            gap: 1em;
+            border-radius: 0 GV.$border-radius GV.$border-radius GV.$border-radius;
+            display: flex;
+            flex-direction: column;
+            background-color: GV.$primary-hover;
+
+            .option {
+                flex-grow: 1;
+                border-radius: GV.$border-radius;
+                padding: 8px;
+                &:hover {
+                    background-color: GV.$background;
+                }
+            }
+        }
+    }
+
+}
