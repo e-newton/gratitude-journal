@@ -1,0 +1,5 @@
+@use '../GlobalVariables' as GV;
+.entry-list {
+    display: flex;
+    flex-direction: column;
+}

@@ -5,8 +5,9 @@ import { AppViewState } from '../app-main/AppMain';
 import './ViewEntriesView.scss';
 import Calendar, { CalendarSelection } from '../calendar/Calendar';
 import { v4 as uuidv4 } from 'uuid';
+import ViewEntriesList from '../view-entries-list/ViewEntriesList';
 
-type Entry = {
+export type Entry = {
     entry: string;
     id: string;
     date: number | Date;
@@ -39,6 +40,8 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
         currentEntries: generateEntries()
     });
 
+    // TODO: Remove
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const onSelectChange = (selection: CalendarSelection) => {
         setState({currentEntries: generateEntries()});
     };
@@ -49,11 +52,7 @@ export default function ViewEntriesView(props: ViewEntriesViewProps) {
                 <FontAwesomeIcon icon={faChevronLeft}/>
             </button>
             <Calendar onSelectChange={onSelectChange} />
-            <div>
-                {
-                    state.currentEntries.map((entry, i)=> <p key={i}>{entry.entry}</p>)
-                }
-            </div>
+            <ViewEntriesList entries={state.currentEntries} />
         </div>
     );
 }

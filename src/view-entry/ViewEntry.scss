@@ -1,0 +1,16 @@
+@use '../GlobalVariables' as GV;
+.entry {
+    width: calc(500px - 16px);
+    min-height: 4em;
+    padding: 8px;
+    margin-top: 16px;
+    position: relative;
+    border: GV.$container-border;
+    border-radius: GV.$border-radius;
+    overflow-wrap: break-word;
+    display: flex;
+
+    span {
+        margin-right: 32px;
+    }
+}
