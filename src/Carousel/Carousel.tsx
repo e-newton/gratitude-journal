@@ -43,7 +43,7 @@ export function CarouselItem(props: CarouselItemProps) {
         <div className={getClassName()} style={{ left: getIndexLeft() }}>
             <div className='inner-display'>
                 <div className='date'>{getDate()}</div>
-                <div className='entry'>{props.entry.entry}</div>
+                <div className='carousel-entry'>{props.entry.entry}</div>
             </div>
         </div>
     );
